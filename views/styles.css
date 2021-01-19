@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;900&display=swap");
+body {
+  background-color: black;
+  color: white;
+  font-family: "Montserrat";
+  text-align: center;
+  background: linear-gradient(
+    90deg,
+    rgb(0, 0, 0) 12%,
+    rgb(0, 0, 0) 14%,
+    rgb(0, 0, 0) 85%,
+    rgb(0, 0, 0) 88%
+  );
+
+  background: -moz-linear-gradient(
+    90deg,
+    rgb(0, 0, 0) 12%,
+    rgb(0, 0, 0) 14%,
+    rgb(0, 0, 0) 85%,
+    rgb(0, 0, 0) 88%
+  );
+
+  background: -webkit-linear-gradient(
+    90deg,
+    rgb(0, 0, 0) 12%,
+    rgb(0, 0, 0) 14%,
+    rgb(0, 0, 0) 85%,
+    rgb(0, 0, 0) 88%
+  );
+
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#000000", endColorstr="#000000", GradientType=1 );
+}
+button {
+  border: 2px solid rgb(54, 54, 54);
+  background-color: rgb(45, 45, 45);
+  color: white;
+  padding: 15px 32px;
+  font-family: "Montserrat";
+  border-radius: 8px;
+  text-decoration: none;
+}
+input {
+  border: 2px solid rgb(54, 54, 54);
+  background-color: rgb(45, 45, 45);
+  color: white;
+  padding: 15px 32px;
+  font-family: "Montserrat";
+  border-radius: 8px;
+  text-decoration: none;
+}
+button:hover {
+  border: 2px solid rgb(97, 97, 97);
+  font-family: "Montserrat";
+}
+.button {
+  border: 2px solid rgb(54, 54, 54);
+  font-family: "Montserrat";
+  background-color: rgb(45, 45, 45);
+  color: white;
+  padding: 15px 32px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+.button:hover {
+  border: 2px solid rgb(97, 97, 97);
+  font-family: "Montserrat";
+}

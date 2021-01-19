@@ -1,0 +1,35 @@
+<link rel="stylesheet" href="shit.css" />
+<link rel="stylesheet" id="dark" href="styles.css" />
+<title>About LapQuip</title>
+<br />
+<a class="button" href="/">Join Game</a>
+<a class="button" href="/host">Host Game</a>
+<a class="button" onclick="shitshow()">Toggle shitshow</a>
+<br />
+<br />
+<style>
+  h3 {
+    word-wrap: normal;
+  }
+</style>
+<h1>About LapQuip</h1>
+<h2>
+  LapQuip is a game created by Blocks_n_more with the intent of being similar to
+  the QuipLash game by JackBox. This game is not meant to take away from JackBox
+  in the slightest. For any issues relating to legality please contact
+  <code>Blocks_n_more#5526</code>
+</h2>
+<script>
+  function shitshow() {
+    console.log("test");
+    let dark = getElm("dark");
+    if (dark.disabled) {
+      dark.disabled = false;
+    } else {
+      dark.disabled = true;
+    }
+  }
+  function getElm(id) {
+    return document.getElementById(id);
+  }
+</script>

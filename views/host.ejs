@@ -1,0 +1,61 @@
+<!-- Created by Blocks_n_more -->
+<link rel="stylesheet" href="shit.css" />
+<link rel="stylesheet" id="dark" href="styles.css" />
+<title>LapQuip Created by Blocks_n_more</title>
+<br />
+<a class="button" href="/">Join Game</a>
+<a class="button" href="/about">About</a>
+<a class="button" onclick="shitshow()">Toggle shitshow</a>
+<br />
+<br />
+
+<!-- Host GUI -->
+<h1 id="directions">Host a game</h1>
+<h2 id="connectedplayers">Players Connected:</h2>
+<h2 id="players"></h2>
+<button id="host" onclick="hostgame()">Host</button>
+
+<!-- JS Source -->
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io();
+  var code = -1;
+  var players = [];
+  function getElm(id) {
+    return document.getElementById(id);
+  }
+  getElm("connectedplayers").style.display = "none";
+  function hostgame() {
+    getElm("directions").innerHTML = "Connecting to server!";
+    getElm("host").style.display = "none";
+    socket.emit("hostgame");
+  }
+  socket.on("createdgame", (json) => {
+    code = json.code;
+    getElm("connectedplayers").style.display = "";
+    getElm("directions").innerHTML =
+      "Players! Join up with the code <code>" + code + "</code>";
+  });
+  socket.on("playerjoingame", (json) => {
+    if (json.code !== code) return;
+    players.push(json.username);
+    updatePlayers();
+  });
+  socket.on("playerleave", (json) => {
+    if (players.indexOf(json.username) > -1) {
+      players.splice(players.indexOf(json.username), 1);
+    }
+    updatePlayers();
+  });
+  function updatePlayers() {
+    getElm("players").innerHTML = players.toString();
+  }
+  function shitshow() {
+    let dark = getElm("dark");
+    if (dark.disabled) {
+      dark.disabled = false;
+    } else {
+      dark.disabled = true;
+    }
+  }
+</script>
