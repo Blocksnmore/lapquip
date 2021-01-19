@@ -1,4 +1,3 @@
-
 // Init stuff
 var socket = io();
 var code = -1;

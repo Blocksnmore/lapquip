@@ -1,4 +1,3 @@
-
 // Init stuff
 var socket = io();
 var code;
@@ -25,9 +24,8 @@ function shitshow() {
   }
 }
 
-function directions(text){
-  getElm("directions").innerHTML =
-    text;
+function directions(text) {
+  getElm("directions").innerHTML = text;
 }
 
 // Socket game code
@@ -40,24 +38,23 @@ socket.on("connectsucessfully", () => {
 });
 
 socket.on("invalidcode", () => {
-  directions(
-    "Invalid code provided! The game might have ended");
+  directions("Invalid code provided! The game might have ended");
 });
 
-socket.on("gameclosed", json => {
+socket.on("gameclosed", (json) => {
   if (code !== json.code) return;
-    directions("Game closed by host! <br>Type a code and username");
-    getElm("submitname").style.display = "";
-    getElm("submitcode").style.display = "";
-    getElm("submitusername").style.display = "";
-})
-
-socket.on("gamestart", (json)=>{
-  if(code !== json.code) return;
-  directions("Look at the hosts screen!")
+  directions("Game closed by host! <br>Type a code and username");
+  getElm("submitname").style.display = "";
+  getElm("submitcode").style.display = "";
+  getElm("submitusername").style.display = "";
 });
 
-socket.on("question", json=>{
-  if(code !== json.code) return;
-  directions("Respond to the question!<br>"+json.question);
-})
+socket.on("gamestart", (json) => {
+  if (code !== json.code) return;
+  directions("Look at the hosts screen!");
+});
+
+socket.on("question", (json) => {
+  if (code !== json.code) return;
+  directions("Respond to the question!<br>" + json.question);
+});

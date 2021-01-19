@@ -59,15 +59,18 @@ function getRandomInt(min, max) {
 }
 
 // Page render
-app.get(["/", "/styles.css", "/host", "/about", "/shit.css", "/gamescripts/*"], async (req, res) => {
-  if (req.path === "/") return res.render("./home.ejs");
-  if (req.path === "/host") return res.render("./host.ejs");
-  if (req.path === "/about") return res.render("./about.ejs");
-  if (req.path.includes("."))
-    if (require("fs").existsSync("./views" + req.path))
-      return res.sendFile(__dirname + "/views" + req.path);
-    else res.render("./404.ejs");
-});
+app.get(
+  ["/", "/styles.css", "/host", "/about", "/shit.css", "/gamescripts/*"],
+  async (req, res) => {
+    if (req.path === "/") return res.render("./home.ejs");
+    if (req.path === "/host") return res.render("./host.ejs");
+    if (req.path === "/about") return res.render("./about.ejs");
+    if (req.path.includes("."))
+      if (require("fs").existsSync("./views" + req.path))
+        return res.sendFile(__dirname + "/views" + req.path);
+      else res.render("./404.ejs");
+  }
+);
 
 // Init server
 server.listen(3000, () => {
@@ -77,4 +80,4 @@ server.listen(3000, () => {
 app.use(function (req, res) {
   res.status(404).render("./404");
 });
-("LapQuip!")
+("LapQuip!");
