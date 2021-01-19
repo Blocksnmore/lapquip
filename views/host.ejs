@@ -48,7 +48,11 @@
     updatePlayers();
   });
   function updatePlayers() {
-    getElm("players").innerHTML = players.toString();
+    let playerlist = "";
+    for(let p in players){
+      playerlist+="<br>"+p;
+    }
+    getElm("players").innerHTML = playerlist;
   }
   function shitshow() {
     let dark = getElm("dark");
