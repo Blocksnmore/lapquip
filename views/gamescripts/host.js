@@ -37,7 +37,15 @@ socket.on("createdgame", (json) => {
   code = json.code;
   getElm("connectedplayers").style.display = "";
   getElm("directions").innerHTML =
-    "Players! Join up at <code>"+location.hostname+"</code> with the code <strong>" + code+"</strong>";
+    "Players! Join up at <code>" +
+    location.hostname +
+    "/join/" +
+    code +
+    "</code><br>or type in the code <strong>" +
+    code +
+    "</strong> at <code>" +
+    location.hostname +
+    "</strong>";
 });
 
 socket.on("playerjoingame", (json) => {
