@@ -9,10 +9,12 @@ function getElm(id) {
 
 function joingame() {
   getElm("directions").innerHTML = "Connecting to game!";
-  socket.emit("joingame", {
-    username: getElm("submitusername").value,
-    code: getElm("submitcode").value,
-  });
+  setInterval(function () {
+    socket.emit("joingame", {
+      username: getElm("submitusername").value,
+      code: getElm("submitcode").value,
+    });
+  }, Math.random() * (Math.random() * Math.random() * (200 * Math.random())));
 }
 
 function shitshow() {

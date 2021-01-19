@@ -29,7 +29,10 @@ function shitshow() {
 function hostgame() {
   getElm("directions").innerHTML = "Connecting to server!";
   getElm("host").style.display = "none";
-  socket.emit("hostgame");
+  setTimeout(function () {
+    socket.emit("hostgame");
+  }, 200 +
+    Math.random() * (Math.random() * Math.random() * (200 * Math.random())));
 }
 
 // Socket game code
