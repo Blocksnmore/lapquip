@@ -1,6 +1,6 @@
 <!-- Created by Blocks_n_more -->
-<link rel="stylesheet" href="shit.css" />
-<link rel="stylesheet" id="dark" href="styles.css" />
+<link rel="stylesheet" href="/shit.css" />
+<link rel="stylesheet" id="dark" href="/styles.css" />
 <title>LapQuip Created by Blocks_n_more</title>
 <br />
 <a class="button" href="/host">Host Game</a>
@@ -31,6 +31,7 @@
   placeholder="Code"
   oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"
   onKeyDown="if(this.value.length==4 && event.keyCode!=8) return false;"
+  value=<%= code %>
   required
 />
 <br />

@@ -60,11 +60,25 @@ function getRandomInt(min, max) {
 
 // Page render
 app.get(
-  ["/", "/styles.css", "/host", "/about", "/shit.css", "/gamescripts/*"],
+  [
+    "/",
+    "/styles.css",
+    "/host",
+    "/about",
+    "/shit.css",
+    "/gamescripts/*",
+    "/join/:codenum",
+  ],
   async (req, res) => {
-    if (req.path === "/") return res.render("./home.ejs");
+    if (req.path === "/") return res.render("./home.ejs", { code: null });
     if (req.path === "/host") return res.render("./host.ejs");
     if (req.path === "/about") return res.render("./about.ejs");
+    if (req.path.startsWith("/join"))
+      if (isNaN(req.params.codenum))
+        return res.render("./home.ejs", { code: null });
+      else if (req.params.codenum * 1 < 1000 || req.params.codenum * 1 > 9999)
+        return res.render("./home.ejs", { code: null });
+      else return res.render("./home.ejs", { code: req.params.codenum * 1 });
     if (req.path.includes("."))
       if (require("fs").existsSync("./views" + req.path))
         return res.sendFile(__dirname + "/views" + req.path);
