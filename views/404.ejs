@@ -4,21 +4,9 @@
 <a class="button" href="/">Join Game</a>
 <a class="button" href="/host">Host Game</a>
 <a class="button" href="/about">About</a>
-<a class="button" onclick="shitshow()">Toggle shitshow</a>
+<a class="button" onclick="shitshow()">Toggle chaos</a>
 <br />
 <br />
 <h2>ur stupit</h2>
 <h2>aka ur at 404</h2>
-<script>
-  function shitshow() {
-    let dark = getElm("dark");
-    if (dark.disabled) {
-      dark.disabled = false;
-    } else {
-      dark.disabled = true;
-    }
-  }
-  function getElm(id) {
-    return document.getElementById(id);
-  }
-</script>
+<script src="/gamescripts/misc.js"></script>

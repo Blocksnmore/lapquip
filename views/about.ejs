@@ -4,7 +4,7 @@
 <br />
 <a class="button" href="/">Join Game</a>
 <a class="button" href="/host">Host Game</a>
-<a class="button" onclick="shitshow()">Toggle shitshow</a>
+<a class="button" onclick="shitshow()">Toggle chaos</a>
 <br />
 <br />
 <style>
@@ -19,17 +19,4 @@
   in the slightest. For any issues relating to legality please contact
   <code>Blocks_n_more#5526</code>
 </h2>
-<script>
-  function shitshow() {
-    console.log("test");
-    let dark = getElm("dark");
-    if (dark.disabled) {
-      dark.disabled = false;
-    } else {
-      dark.disabled = true;
-    }
-  }
-  function getElm(id) {
-    return document.getElementById(id);
-  }
-</script>
+<script src="/gamescripts/misc.js"></script>

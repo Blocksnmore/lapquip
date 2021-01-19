@@ -33,6 +33,7 @@ io.on("connection", async (socket) => {
       console.log(
         "The game " + usercode + " has been closed due to the host leaving"
       );
+      gamedata.delete(usercode);
     }
   });
   socket.on("joingame", (json) => {
@@ -58,7 +59,7 @@ function getRandomInt(min, max) {
 }
 
 // Page render
-app.get(["/", "/styles.css", "/host", "/about", "/shit.css"], async (req, res) => {
+app.get(["/", "/styles.css", "/host", "/about", "/shit.css", "/gamescripts/*"], async (req, res) => {
   if (req.path === "/") return res.render("./home.ejs");
   if (req.path === "/host") return res.render("./host.ejs");
   if (req.path === "/about") return res.render("./about.ejs");
@@ -76,3 +77,4 @@ server.listen(3000, () => {
 app.use(function (req, res) {
   res.status(404).render("./404");
 });
+("LapQuip!")

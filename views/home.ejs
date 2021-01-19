@@ -5,7 +5,7 @@
 <br />
 <a class="button" href="/host">Host Game</a>
 <a class="button" href="/about">About</a>
-<a class="button" onclick="shitshow()">Toggle shitshow</a>
+<a class="button" onclick="shitshow()">Toggle chaos</a>
 <br />
 <br />
 
@@ -30,34 +30,4 @@
 
 <!-- JS Source -->
 <script src="/socket.io/socket.io.js"></script>
-<script>
-  var socket = io();
-  function getElm(id) {
-    return document.getElementById(id);
-  }
-  function joingame() {
-    getElm("directions").innerHTML = "Connecting to game!";
-    socket.emit("joingame", {
-      username: getElm("submitusername").value,
-      code: getElm("submitcode").value,
-    });
-  }
-  socket.on("connectsucessfully", () => {
-    getElm("directions").innerHTML = "Connected! Wait for the game to start";
-    getElm("submitname").style.display = "none";
-    getElm("submitcode").style.display = "none";
-    getElm("submitusername").style.display = "none";
-  });
-  socket.on("invalidcode", () => {
-    getElm("directions").innerHTML =
-      "Invalid code provided! The game might have ended";
-  });
-  function shitshow() {
-    let dark = getElm("dark");
-    if (dark.disabled) {
-      dark.disabled = false;
-    } else {
-      dark.disabled = true;
-    }
-  }
-</script>
+<script src="/gamescripts/play.js"></script>
