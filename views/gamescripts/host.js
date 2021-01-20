@@ -3,6 +3,7 @@ var socket = io();
 var code = -1;
 var players = [];
 getElm("connectedplayers").style.display = "none";
+getElm("startgame").style.display = "none";
 
 // Functions for tools and stuff
 function getElm(id) {
@@ -15,6 +16,8 @@ function updatePlayers() {
     playerlist += p + "<br>";
   });
   getElm("players").innerHTML = playerlist;
+  if(players.length > 2) getElm("startgame").style.display = "";
+  else getElm("startgame").style.display = "none";
 }
 
 function shitshow() {
@@ -24,6 +27,12 @@ function shitshow() {
   } else {
     dark.disabled = true;
   }
+}
+
+function startgame(){
+  if(players.length < 3) return;
+  socket.emit("gamestart")
+  getElm("directions").innerHTML = "Players will be given wacky prompts they respond to,<br>Once everyone is finished voting will begin for which is better!";
 }
 
 function hostgame() {

@@ -9,7 +9,7 @@ function getElm(id) {
 
 function joingame() {
   getElm("directions").innerHTML = "Connecting to game!";
-  setInterval(function () {
+  setTimeout(function () {
     socket.emit("joingame", {
       username: getElm("submitusername").value,
       code: getElm("submitcode").value,
@@ -41,6 +41,9 @@ socket.on("connectsucessfully", () => {
 
 socket.on("invalidcode", () => {
   directions("Invalid code provided! The game might have ended");
+  getElm("submitname").style.display = "";
+  getElm("submitcode").style.display = "";
+  getElm("submitusername").style.display = "";
 });
 
 socket.on("gameclosed", (json) => {

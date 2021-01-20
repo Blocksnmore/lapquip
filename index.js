@@ -17,6 +17,9 @@ io.on("connection", async (socket) => {
   socket.on("joingame", async (json) => {
     username = json.username;
   });
+  socket.on("gamestart", ()=>{ 
+    io.emit("gamestart", {code:usercode})
+    })
   socket.on("hostgame", () => {
     let gamecode = createGameCode().toString();
     gamedata.add(gamecode);
