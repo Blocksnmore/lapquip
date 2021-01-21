@@ -14,12 +14,15 @@ var gamedata = new Set();
 io.on("connection", async (socket) => {
   var username;
   var usercode;
+
   socket.on("joingame", async (json) => {
     username = json.username;
   });
-  socket.on("gamestart", ()=>{ 
-    io.emit("gamestart", {code:usercode})
-    })
+
+  socket.on("gamestart", () => {
+    io.emit("gamestart", { code: usercode });
+  });
+
   socket.on("hostgame", () => {
     let gamecode = createGameCode().toString();
     gamedata.add(gamecode);
@@ -27,6 +30,7 @@ io.on("connection", async (socket) => {
     usercode = gamecode;
     socket.emit("createdgame", { code: gamecode });
   });
+
   socket.on("disconnect", () => {
     if (username) {
       io.emit("playerleave", { username: username });
@@ -39,6 +43,15 @@ io.on("connection", async (socket) => {
       gamedata.delete(usercode);
     }
   });
+
+  socket.on("announceprompt", (json) => {
+    let phrase = require("./phrases.js").randomPhrase();
+    io.emit("prompt", {
+      code: usercode,
+      prompt: phrase,
+    });
+  });
+
   socket.on("joingame", (json) => {
     if (!gamedata.has(json.code)) return socket.emit("invalidcode");
     io.emit("playerjoingame", json);

@@ -1,7 +1,10 @@
 // Init stuff
+const playersrequired = 0; // For debugging purposes, DO NOT MODIFY
 var socket = io();
 var code = -1;
 var players = [];
+var playersfinished = [];
+var responses = [];
 getElm("connectedplayers").style.display = "none";
 getElm("startgame").style.display = "none";
 
@@ -16,8 +19,9 @@ function updatePlayers() {
     playerlist += p + "<br>";
   });
   getElm("players").innerHTML = playerlist;
-  if(players.length > 2) getElm("startgame").style.display = "";
+  if (players.length > playersrequired) getElm("startgame").style.display = "";
   else getElm("startgame").style.display = "none";
+  if (players.length === playersfinished.length) showresponses();
 }
 
 function shitshow() {
@@ -29,10 +33,21 @@ function shitshow() {
   }
 }
 
-function startgame(){
-  if(players.length < 3) return;
-  socket.emit("gamestart")
-  getElm("directions").innerHTML = "Players will be given wacky prompts they respond to,<br>Once everyone is finished voting will begin for which is better!";
+function showresponses() {}
+
+function startgame() {
+  if (players.length < playersrequired + 1) return;
+  socket.emit("gamestart");
+  getElm("directions").innerHTML =
+    "Players will be given wacky prompts they respond to,<br>Once everyone is finished voting will begin for which is better!";
+  getElm("players").style.display = "none";
+  getElm("startgame").style.display = "none";
+  getElm("connectedplayers").style.display = "none";
+  setTimeout(function () {
+    getElm("directions").innerHTML =
+      "Players! Respond to the prompt provided on your device!";
+    socket.emit("announceprompt");
+  }, 5000);
 }
 
 function hostgame() {
@@ -45,6 +60,16 @@ function hostgame() {
 }
 
 // Socket game code
+socket.on("phrasegenerated", (json) => {
+  console.log("phrase received, ");
+  console.log(json);
+  socket.emit("broadcastmsg", {
+    bcname: "prompt",
+    prompt: json.phrase,
+    code: code,
+  });
+});
+
 socket.on("createdgame", (json) => {
   code = json.code;
   getElm("connectedplayers").style.display = "";
@@ -67,6 +92,9 @@ socket.on("playerjoingame", (json) => {
 });
 
 socket.on("playerleave", (json) => {
+  if (playersfinished.indexOf(json.username) > -1) {
+    playersfinished.splice(playersfinished.indexOf(json.username), 1);
+  }
   if (players.indexOf(json.username) > -1) {
     players.splice(players.indexOf(json.username), 1);
   }

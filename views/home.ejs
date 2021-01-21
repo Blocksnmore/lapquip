@@ -26,17 +26,25 @@
 
 <!-- Join GUI -->
 <input
-  type="number"
+  type="text"
   id="submitcode"
   placeholder="Code"
   oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"
   onKeyDown="if(this.value.length==4 && event.keyCode!=8) return false;"
-  value=<%= code %>
+  value="<%= code %>"
+  required
+/>
+<input
+  type="text"
+  id="promptresponse"
+  placeholder="Response (Max 40 Chars)"
+  onKeyDown="if(this.value.length==40 && event.keyCode!=8) return false;"
   required
 />
 <br />
 <br />
 <input type="text" id="submitusername" placeholder="Username" required />
+<button id="submitresponse" onclick="submitresponse()">Submit response</button>
 <br />
 <br />
 <button id="submitname" onclick="joingame()">Join</button>

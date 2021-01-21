@@ -1,7 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;900&display=swap");
+/*@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;900&display=swap");/**/
 body {
   font-family: "Montserrat";
-  color:black;
+  color: black;
   text-align: center;
   background: hsla(184, 88%, 47%, 1);
 
@@ -58,7 +58,7 @@ input {
   border-radius: 8px;
   text-decoration: none;
 }
-.codebutton{
+.codebutton {
   border: none;
   background-color: inherit;
   padding: 14px 28px;

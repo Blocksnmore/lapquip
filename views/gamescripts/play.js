@@ -1,6 +1,8 @@
 // Init stuff
 var socket = io();
 var code;
+getElm("submitresponse").style.display = "none";
+getElm("promptresponse").style.display = "none";
 
 // Functions
 function getElm(id) {
@@ -26,6 +28,10 @@ function shitshow() {
   }
 }
 
+function submitresponse() {
+  let response = getElm("").value;
+}
+
 function directions(text) {
   getElm("directions").innerHTML = text;
 }
@@ -37,6 +43,13 @@ socket.on("connectsucessfully", () => {
   getElm("submitname").style.display = "none";
   getElm("submitcode").style.display = "none";
   getElm("submitusername").style.display = "none";
+});
+
+socket.on("prompt", (json) => {
+  if (code !== json.code) return;
+  directions("Respond to the prompt<br>" + json.prompt);
+  getElm("submitresponse").style.display = "";
+  getElm("promptresponse").style.display = "";
 });
 
 socket.on("invalidcode", () => {
@@ -52,6 +65,8 @@ socket.on("gameclosed", (json) => {
   getElm("submitname").style.display = "";
   getElm("submitcode").style.display = "";
   getElm("submitusername").style.display = "";
+  getElm("promptresponse").style.display = "none";
+  getElm("submitresponse").style.display = "none";
 });
 
 socket.on("gamestart", (json) => {
