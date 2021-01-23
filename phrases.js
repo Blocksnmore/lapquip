@@ -11,7 +11,7 @@ const phrases = [
   "The best way to win an argument is ____",
   "Describe your life in 10 words or less ____",
   "You stub your toe and yell out ____",
-  "If you were shot buy a drunk guy in a chucke cheese your last words would be____",
+  "If you were shot buy a drunk guy in a chucke cheese your last words would be ____",
   "Ah yes ____ is the greatest insparation to this country.",
   "Motherfuckers took my ____ can't have shit in detroit.",
 ];
