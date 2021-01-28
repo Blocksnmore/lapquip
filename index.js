@@ -40,11 +40,19 @@ io.on("connection", async (socket) => {
     }
   });
 
-  socket.on("announceprompt", (json) => {
+  socket.on("announceprompt", () => {
     let phrase = require("./phrases.js").randomPhrase();
     io.emit("prompt", {
       code: usercode,
       prompt: phrase,
+    });
+  });
+
+  socket.on("userresponse", (json) => {
+    io.emit("userresponse", {
+      code: json.code,
+      response: json.response,
+      username: username,
     });
   });
 

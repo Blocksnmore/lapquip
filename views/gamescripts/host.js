@@ -70,6 +70,13 @@ socket.on("phrasegenerated", (json) => {
   });
 });
 
+socket.on("prompt", (json) => {
+  if (json.code !== code) return;
+  playersfinished.push(json.username);
+  responses.push({ author: json.username, prompt: json.prompt });
+  updatePlayers();
+});
+
 socket.on("createdgame", (json) => {
   code = json.code;
   getElm("connectedplayers").style.display = "";
@@ -98,5 +105,10 @@ socket.on("playerleave", (json) => {
   if (players.indexOf(json.username) > -1) {
     players.splice(players.indexOf(json.username), 1);
   }
+  let authors = [];
+  responses.forEach(r =>{
+    authors.push(r.author);
+  });
+  
   updatePlayers();
 });
