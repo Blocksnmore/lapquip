@@ -15,10 +15,6 @@ io.on("connection", async (socket) => {
   var username;
   var usercode;
 
-  socket.on("joingame", async (json) => {
-    username = json.username;
-  });
-
   socket.on("gamestart", () => {
     io.emit("gamestart", { code: usercode });
   });
@@ -54,6 +50,7 @@ io.on("connection", async (socket) => {
 
   socket.on("joingame", (json) => {
     if (!gamedata.has(json.code)) return socket.emit("invalidcode");
+    username = json.username;
     io.emit("playerjoingame", json);
     socket.emit("connectsucessfully");
     console.log(

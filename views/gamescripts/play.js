@@ -73,8 +73,3 @@ socket.on("gamestart", (json) => {
   if (code !== json.code) return;
   directions("Look at the hosts screen!");
 });
-
-socket.on("question", (json) => {
-  if (code !== json.code) return;
-  directions("Respond to the question!<br>" + json.question);
-});

@@ -18,7 +18,7 @@ const phrases = [
   "Say it with me! #____LivesDon'tMatter",
   "Wifi names that would make you consider moving out",
   "Something awkward to say during a virtual meeting",
-  "____ is a clown at developing",
+  "____ is/are a clown at developing",
 ];
 exports.getPhrases = function () {
   return phrases;
