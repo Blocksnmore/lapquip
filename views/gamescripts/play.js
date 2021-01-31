@@ -29,14 +29,14 @@ function shitshow() {
 }
 
 function submitresponse() {
+  directions("Wait for everyone to finish writing their prompts");
   getElm("promptresponse").value = "";
   getElm("promptresponse").style.display = "none";
   getElm("submitresponse").style.display = "none";
-  io.emit("userresponse", {
+  socket.emit("userresponse", {
     code: code,
     response: getElm("promptresponse").value,
   });
-  directions("Wait for everyone to finish writing their prompts");
 }
 
 function directions(text) {

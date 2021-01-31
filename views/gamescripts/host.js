@@ -1,5 +1,5 @@
 // Init stuff
-const playersrequired = 0; // For debugging purposes, DO NOT MODIFY
+const playersrequired = 1; // For debugging purposes, DO NOT MODIFY
 var socket = io();
 var code = -1;
 var players = [];
@@ -33,7 +33,9 @@ function shitshow() {
   }
 }
 
-function showresponses() {}
+function showresponses() {
+  getElm("directions").innerHTML = "Lets see the results!";
+}
 
 function startgame() {
   if (players.length < playersrequired + 1) return;
@@ -70,11 +72,12 @@ socket.on("phrasegenerated", (json) => {
   });
 });
 
-socket.on("prompt", (json) => {
+socket.on("userresponse", (json) => {
   if (json.code !== code) return;
   playersfinished.push(json.username);
   responses.push({ author: json.username, prompt: json.prompt });
   updatePlayers();
+  console.log(json);
 });
 
 socket.on("createdgame", (json) => {
@@ -106,9 +109,15 @@ socket.on("playerleave", (json) => {
     players.splice(players.indexOf(json.username), 1);
   }
   let authors = [];
-  responses.forEach(r =>{
+  responses.forEach((r) => {
     authors.push(r.author);
   });
-  
+  if (authors.includes(json.username)) {
+    responses.forEach((r) => {
+      if (r.author === json.author) {
+        responses.splice(responses.indexOf(r), 1);
+      }
+    });
+  }
   updatePlayers();
 });
